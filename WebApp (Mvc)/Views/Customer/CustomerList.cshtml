@@ -1,0 +1,86 @@
+﻿@model DataTable;
+@using System.Data;
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Customers</li>
+                <li class="breadcrumb-item active">Customers List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Customers List</h5>
+                        <div align="right">
+                            <a asp-controller="Customer" asp-action="CustomerForm" class="btn btn-primary">Add</a>
+                            <a asp-controller="Customer" asp-action="DownloadCustomerListCsv" class="btn btn-success">Export To Csv</a>
+                        </div>
+                        <span class="text-danger">@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Customer ID</th>
+                                    <th>Customer Name</th>
+                                    <th>Home Address</th>
+                                    <th>Email</th>
+                                    <th>Mobile No</th>
+                                    <th>GST NO</th>
+                                    <th>City Name</th>
+                                    <th>Pin Code</th>
+                                    <th>Net Amount</th>
+                                    <th>User Name</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow customer in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@customer["CustomerID"]</td>
+                                        <td>@customer["CustomerName"]</td>
+                                        <td>@customer["HomeAddress"]</td>
+                                        <td>@customer["Email"]</td>
+                                        <td>@customer["MobileNo"]</td>
+                                        <td>@customer["GST_NO"]</td>
+                                        <td>@customer["CityName"]</td>
+                                        <td>@customer["PinCode"]</td>
+                                        <td>@customer["NetAmount"]</td>
+                                        <td>@customer["UserName"]</td>
+                                        <td>
+                                            <a class="btn btn-outline-warning btn-xs" asp-controller="Customer" asp-action="CustomerForm" asp-route-CustomerID="@customer["CustomerID"]">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-controller="Customer" asp-action="CustomerDelete" onsubmit="return confirm('Are You Sure you want to Delete?')">
+                                                <input type="hidden" name="CustomerID" value="@customer["CustomerID"]" />
+                                                <button type="submit" class="btn btn-outline-danger btn-xs">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

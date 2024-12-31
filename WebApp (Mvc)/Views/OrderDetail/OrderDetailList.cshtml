@@ -1,0 +1,80 @@
+﻿@model DataTable;
+@using System.Data;
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Order Detail</li>
+                <li class="breadcrumb-item active">Order Detail List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order Detail List</h5>
+                        <div align="right">
+                            <a asp-controller="OrderDetail" asp-action="OrderDetailForm" class="btn btn-primary">Add</a>
+                            <a asp-controller="OrderDetail" asp-action="DownloadOrderDetailListCsv" class="btn btn-success">Export To Csv</a>
+                        </div>
+                        <span class="text-danger">@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order Detail ID</th>
+                                    <th>Order ID</th>
+                                    <th>Product Name</th>
+                                    <th>Quantity</th>
+                                    <th>Amount</th>
+                                    <th>Total Amount</th>
+                                    <th>User Name</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow orderDetail in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@orderDetail["OrderDetailID"]</td>
+                                        <td>@orderDetail["OrderID"]</td>
+                                        <td>@orderDetail["ProductName"]</td>
+                                        <td>@orderDetail["Quantity"]</td>
+                                        <td>@orderDetail["Amount"]</td>
+                                        <td>@orderDetail["TotalAmount"]</td>
+                                        <td>@orderDetail["UserName"]</td>
+                                        <td>
+                                            <a class="btn btn-outline-warning btn-xs" asp-controller="OrderDetail" asp-action="OrderDetailForm" asp-route-OrderDetailID="@orderDetail["OrderDetailID"]">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-controller="OrderDetail" asp-action="OrderDetailDelete" onsubmit="return confirm('Are You Sure you want to Delete?')">
+                                                <input type="hidden" name="OrderDetailID" value="@orderDetail["OrderDetailID"]" />
+                                                <button type="submit" class="btn btn-outline-danger btn-xs">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

@@ -1,0 +1,82 @@
+﻿@model DataTable;
+@using System.Data;
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Bills</li>
+                <li class="breadcrumb-item active">Bills List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Bills List</h5>
+                        <div align="right">
+                            <a asp-controller="Bills" asp-action="BillsForm" class="btn btn-primary">Add</a>
+                            <a asp-controller="Bills" asp-action="DownloadBillsListCsv" class="btn btn-success">Export To Csv</a>
+                        </div>
+                        <span class="text-danger">@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Bill ID</th>
+                                    <th>Bill Number</th>
+                                    <th>Bill Date</th>
+                                    <th>Order ID</th>
+                                    <th>Total Amount</th>
+                                    <th>Discount</th>
+                                    <th>Net Amount</th>
+                                    <th>User Name</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow bill in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@bill["BillID"]</td>
+                                        <td>@bill["BillNumber"]</td>
+                                        <td>@bill["BillDate"]</td>
+                                        <td>@bill["OrderID"]</td>
+                                        <td>@bill["TotalAmount"]</td>
+                                        <td>@bill["Discount"]</td>
+                                        <td>@bill["NetAmount"]</td>
+                                        <td>@bill["UserName"]</td>
+                                        <td>
+                                            <a class="btn btn-outline-warning btn-xs" asp-controller="Bills" asp-action="BillsForm" asp-route-BillID="@bill["BillID"]">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-controller="Bills" asp-action="BillsDelete" onsubmit="return confirm('Are You Sure you want to Delete?')">
+                                                <input type="hidden" name="BillID" value="@bill["BillID"]" />
+                                                <button type="submit" class="btn btn-outline-danger btn-xs">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

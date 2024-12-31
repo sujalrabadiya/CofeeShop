@@ -1,0 +1,45 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Forms</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">Project</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Employee Form</h5>
+                <!-- Multi Columns Form -->
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="pname" class="form-label">Project Name</label>
+                        <input type="text" class="form-control" id="pname">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="budget" class="form-label">Budget</label>
+                        <input type="number" class="form-control" id="budget">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="sdate" class="form-label">Start Date</label>
+                        <input type="date" class="form-control" id="sdate">
+                    </div>
+                    <div class="col-md-6">
+                        <label for="edate" class="form-label">End Date</label>
+                        <input type="date" class="form-control" id="edate">
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form><!-- End Multi Columns Form -->
+            </div>
+        </div>
+
+    </section>
+
+</main><!-- End #main -->

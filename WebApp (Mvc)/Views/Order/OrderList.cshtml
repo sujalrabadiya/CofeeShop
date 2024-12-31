@@ -1,0 +1,80 @@
+﻿@model DataTable;
+@using System.Data;
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Order</li>
+                <li class="breadcrumb-item active">Order List</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Order List</h5>
+                        <div align="right">
+                            <a asp-controller="Order" asp-action="OrderForm" class="btn btn-primary">Add</a>
+                            <a asp-controller="Order" asp-action="DownloadOrderListCsv" class="btn btn-success">Export To Csv</a>
+                        </div>
+                        <span class="text-danger">@TempData["ErrorMessage"]</span>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Order Id</th>
+                                    <th>Order Date</th>
+                                    <th>Customer Name</th>
+                                    <th>Payment Mode</th>
+                                    <th>Total Amount</th>
+                                    <th>Shipping Address</th>
+                                    <th>User Name</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (DataRow order in Model.Rows)
+                                {
+                                    <tr>
+                                        <td>@order["OrderID"]</td>
+                                        <td>@order["OrderDate"]</td>
+                                        <td>@order["CustomerName"]</td>
+                                        <td>@order["PaymentMode"]</td>
+                                        <td>@order["TotalAmount"]</td>
+                                        <td>@order["ShippingAddress"]</td>
+                                        <td>@order["UserName"]</td>
+                                        <td>
+                                            <a class="btn btn-outline-warning btn-xs" asp-controller="Order" asp-action="OrderForm" asp-route-OrderID="@order["OrderID"]">
+                                                <i class="bi bi-pencil-fill"></i>
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <form method="post" asp-controller="Order" asp-action="OrderDelete" onsubmit="return confirm('Are You Sure you want to Delete?')">
+                                                <input type="hidden" name="OrderID" value="@order["OrderID"]" />
+                                                <button type="submit" class="btn btn-outline-danger btn-xs">
+                                                    <i class="bi bi-x"></i>
+                                                </button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

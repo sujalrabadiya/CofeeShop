@@ -1,0 +1,84 @@
+﻿@model             CustomerModel
+
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Customer Form</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item"><a asp-controller="Customer" asp-action="CustomerList">Customer</a></li>
+                <li class="breadcrumb-item active">Customer Form</li>
+            </ol>
+        </nav>
+    </div>
+
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+
+                <form asp-action="CustomerSave" method="post" class="row g-3">
+                    <input asp-for="CustomerID" hidden />
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                    <div class="col-md-6">
+                        <label asp-for="CustomerName" class="form-label"></label>
+                        <input asp-for="CustomerName" class="form-control" />
+                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="HomeAddress" class="form-label"></label>
+                        <input asp-for="HomeAddress" class="form-control" />
+                        <span asp-validation-for="HomeAddress" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="Email" class="form-label"></label>
+                        <input asp-for="Email" class="form-control" />
+                        <span asp-validation-for="Email" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="MobileNo" class="form-label"></label>
+                        <input asp-for="MobileNo" class="form-control" />
+                        <span asp-validation-for="MobileNo" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="GST_NO" class="form-label"></label>
+                        <input asp-for="GST_NO" class="form-control" />
+                        <span asp-validation-for="GST_NO" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="CityName" class="form-label"></label>
+                        <input asp-for="CityName" class="form-control" />
+                        <span asp-validation-for="CityName" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="PinCode" class="form-label"></label>
+                        <input asp-for="PinCode" class="form-control" />
+                        <span asp-validation-for="PinCode" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="NetAmount" class="form-label"></label>
+                        <input asp-for="NetAmount" class="form-control" type="number" step="0.01" />
+                        <span asp-validation-for="NetAmount" class="text-danger"></span>
+                    </div>
+                    <div class="col-md-6">
+                        <label asp-for="UserID" class="form-label"></label>
+                        <select class="form-control" asp-for="UserID" asp-items="@(new SelectList(ViewBag.UserList, "UserID", "UserName"))">
+                            <option value="">Select User</option>
+                        </select>
+                    </div>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="reset" class="btn btn-secondary">Reset</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

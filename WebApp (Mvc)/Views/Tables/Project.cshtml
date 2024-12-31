@@ -1,0 +1,57 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Tables</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Tables</li>
+                <li class="breadcrumb-item active">Project</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Project</h5>
+                        <div align="right">
+                            <a asp-controller="Forms" asp-action="Project" class="btn btn-primary">Add</a>
+                        </div>
+                        <!-- Table with stripped rows -->
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th>Project Id</th>
+                                    <th>Project Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Datee</th>
+                                    <th>Budget</th>
+                                    <th>Edit</th>
+                                    <th>Delete</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>1</td>
+                                    <td>Department Name</td>
+                                    <td>Department Name</td>
+                                    <td>Department Name</td>
+                                    <td>Department Name</td>
+                                    <td><button class="btn btn-warning">Edit</button></td>
+                                    <td><button class="btn btn-danger">Delete</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <!-- End Table with stripped rows -->
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

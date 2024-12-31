@@ -1,0 +1,39 @@
+﻿<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1>Forms</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+                <li class="breadcrumb-item">Forms</li>
+                <li class="breadcrumb-item active">EmployeeProject</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">EmployeeProject Form</h5>
+                <!-- Multi Columns Form -->
+                <form class="row g-3">
+                    <div class="col-md-6">
+                        <label for="eid" class="form-label">Employee Id</label>
+                        <select id="eid" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <label for="pid" class="form-label">Project Id</label>
+                        <select id="pid" class="form-select">
+                            <option selected>Choose...</option>
+                            <option>...</option>
+                        </select>
+                    </div>
+                </form><!-- End Multi Columns Form -->
+            </div>
+        </div>
+
+    </section>
+
+</main><!-- End #main -->
