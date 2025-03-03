@@ -25,17 +25,18 @@ namespace CofeeShop.Controllers
         #region Api
         #region GET
         [HttpGet]
-        public IActionResult CityList()
+        public async Task<IActionResult> CityList()
         {
-            List<CityModel> cities = new List<CityModel>();
-            HttpResponseMessage response = _client.GetAsync("api/City").Result;
+            HttpResponseMessage response = await _client.GetAsync("api/City");
 
             if (response.IsSuccessStatusCode)
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                cities = JsonConvert.DeserializeObject<List<CityModel>>(data);
+                JsonOperation<List<CityModel>> jsonOperation = new JsonOperation<List<CityModel>>();
+
+                ApiResultData<List<CityModel>> apiResultData = await jsonOperation.jsonDeserialization(response);
+                return View(apiResultData.Data);
             }
-            return View(cities);
+            return View();
         }
         #endregion
 

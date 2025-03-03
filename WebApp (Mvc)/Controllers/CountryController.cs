@@ -24,17 +24,18 @@ namespace CofeeShop.Controllers
         #region Api
         #region GET
         [HttpGet]
-        public IActionResult CountryList()
+        public async Task<IActionResult> CountryList()
         {
-            List<CountryModel> countries = new List<CountryModel>();
-            HttpResponseMessage response = _client.GetAsync("api/Country").Result;
+            HttpResponseMessage response = await _client.GetAsync("api/Country");
 
             if (response.IsSuccessStatusCode)
             {
-                string data = response.Content.ReadAsStringAsync().Result;
-                countries = JsonConvert.DeserializeObject<List<CountryModel>>(data);
+                JsonOperation<List<CountryModel>> jsonOperation = new JsonOperation<List<CountryModel>>();
+
+                ApiResultData<List<CountryModel>> apiResultData = await jsonOperation.jsonDeserialization(response);
+                return View(apiResultData.Data);
             }
-            return View(countries);
+            return View();
         }
         #endregion
 

@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Data;
 using System.Text;
 using CofeeShop.Models;
@@ -29,7 +29,7 @@ namespace CofeeShop.Controllers
             return View(table);
         }
 
-        public IActionResult ProductForm(int ProductID)
+        public IActionResult ProductForm(int? ProductID)
         {
             UserDropDown();
 
